@@ -1,11 +1,6 @@
-fn main() -> anyhow::Result<()> {
+// Necessary because of this issue: https://github.com/rust-lang/cargo/issues/9641
+fn main() -> Result<(), Box<dyn std::error::Error>> {
     embuild::build::CfgArgs::output_propagated("ESP_IDF")?;
-
-    // Will not be available when built with a CMake-first or a PIO-first build
-    // We need to output these only when building the examples' binaries anyway
-    if let Ok(args) = embuild::build::LinkArgs::try_from_env("ESP_IDF") {
-        args.output();
-    }
-
+    embuild::build::LinkArgs::output_propagated("ESP_IDF")?;
     Ok(())
 }

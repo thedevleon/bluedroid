@@ -10,11 +10,15 @@ categories = ["embedded", "hardware-support"]
 readme = "README.md"
 documentation = "https://docs.rs/bluedroid"
 authors = ["Riccardo Persello <riccardo.persello@icloud.com>", "thedevleon"]
+resolver = "2"
+rust-version = "1.66"
 
 exclude = [".embuild", ".idea", ".vscode", "target", "Cargo.lock"]
 
 [features]
+
 default = ["all", "hal", "esp-idf-sys/native"]
+
 
 pio = ["esp-idf-sys/pio"]
 all = ["std", "nightly", "experimental", "embassy"]
@@ -46,7 +50,7 @@ required-features = ["esp-idf-sys/binstart"]
 
 [profile.release]
 strip = true
-opt-level = "z"
+opt-level = "s"
 lto = true
 
 [profile.dev]
